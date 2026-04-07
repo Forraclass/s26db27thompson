@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+
+  p Rows: #{query.rows}
+  p Columns: #{query.cols}
+
+  - rows = Number(query.rows)
+  - col = Number(query.cols)
+
+  if (!Number.isInteger(rows) || !Number.isInteger(col))
+    p Incorrect rows or cols value
+  else if (2 > rows || rows > 12)
+    p Rows value is bigger than 12 or smaller than 2
+  else if (2 > col || col > 12)
+    p Cols value is bigger than 12 or smaller than 2
+  else
+    table#outer 
+      - for(let i = 0; i < rows; i++){
+          tr#middle
+            - for(let j = 0; j < col; j++){
+              td= 2*i - j 
+            - }
+      - }

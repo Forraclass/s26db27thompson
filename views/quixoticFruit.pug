@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+
+  - let results = [{JAZZY: false, color: "brown", marketPrice: "$5.25", name: "Cruszip"}, {JAZZY: true, color: "yellow", marketPrice: "$50.75", name: "Parwhim"}, {JAZZY: false, color: "green", marketPrice: "$1.05", name: "Whiking"}]
+  .container-fluid
+    .row
+      each item in results
+        .col-sm-2
+          p Name: #{item.name}
+          p JAZZY: #{item.JAZZY}
+          p Color: #{item.color}
+          p Market Price: #{item.marketPrice}
