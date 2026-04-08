@@ -60,7 +60,7 @@ var usersRouter = require('./routes/users');
 var quixoticFruitsRouter = require('./routes/quixoticFruit');
 var gridRouter = require('./routes/grid');
 var pickRouter = require('./routes/pick');
-var fruitRouter = require('./routes/resource')
+var fruitRouter = require('./routes/resource');
 
 var app = express();
 
@@ -80,6 +80,7 @@ app.use('/quixotic', quixoticFruitsRouter);
 app.use('/grid', gridRouter);
 app.use('/pick', pickRouter);
 app.use('/resource', fruitRouter);
+app.use('/fruits', quixoticFruitsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

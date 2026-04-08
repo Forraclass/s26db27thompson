@@ -1,9 +1,8 @@
 var express = require('express');
+const fruit_controllers= require('../controllers/fruits');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('quixoticFruit', { title: 'Search Results: Quixotic Fruits' });
-});
+router.get('/', fruit_controllers.fruit_view_all_Page);
 
 module.exports = router;
