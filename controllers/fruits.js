@@ -47,8 +47,16 @@ exports.fruit_create_post = async function(req, res) {
 
 
 // Handle Fruit delete from on DELETE.
-exports.fruit_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Fruit delete DELETE ' + req.params.id);
+exports.fruit_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await Fruit.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 };
 
 // Handle Fruit update form on PUT.
