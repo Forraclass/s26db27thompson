@@ -3,7 +3,7 @@ var Fruit = require('../models/fruit');
 // List of all Fruits
 exports.fruit_view_all_Page = async function(req, res) {
 try{
-    theFruits = await Fruit.find();
+    const theFruits = await Fruit.find();
     res.render('quixoticFruit', { title: 'Fruit Search Results', results: theFruits });
 }
 catch(err){
@@ -12,9 +12,16 @@ catch(err){
 }
 };;
 
-// for a specific Fruit.
-exports.fruit_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Fruit detail: ' + req.params.id);
+//Get a single Fruit
+exports.fruit_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        const result = await Fruit.findById( req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send({"error": `document for id ${req.params.id} not found`});
+    }
 };
 
 // Handle Fruit create on POST.
