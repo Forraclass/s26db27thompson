@@ -26,7 +26,7 @@ exports.fruit_create_post = async function(req, res) {
     // and require that it be a json object
     // {"costume_type":"goat", "cost":12, "size":"large"}
     document.name = req.body.name;
-    document.cost = req.body.color;
+    document.color = req.body.color;
     document.marketPrice = req.body.marketPrice;
     try{
         let result = await document.save();
