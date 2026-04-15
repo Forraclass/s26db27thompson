@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    h1= title
+
+    - let fruit_id = toShow._id
+    - let fruit_name = toShow.name
+    - let fruit_cost = toShow.marketPrice
+    - let fruit_color = toShow.color
+
+    div
+        div.row
+            div(class='fruitAttr mr-3') Fruit ID is:
+            div #{fruit_id}
+
+        div.row
+            div(class='fruitAttr mr-3') Name of Fruit is:
+            div #{fruit_name}
+
+        div.row
+            div(class='fruitAttr mr-3') Fruit Color is:
+            div #{fruit_color}
+
+        div.row
+            div(class='fruitAttr mr-3') Fruit Market Price is:
+            div #{fruit_cost}
