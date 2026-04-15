@@ -1,0 +1,64 @@
+extends layout
+
+block content
+    h1= title
+
+    - let fruit_id = toShow._id
+    - let fruit_name = toShow.name
+    - let fruit_color = toShow.color
+    - let fruit_marketPrice = toShow.marketPrice
+
+    div.row.mb-2
+        div.mr-1 ID is
+        div #{fruit_id}
+
+    - let actionid = "/resource/update/" + fruit_id
+
+    form#FruitForm(action=actionid, method="PUT")
+        div.form-group
+            label.fruitAttr(for="fruit_name") Fruit Name
+            input#fruit_name(
+                type="text",
+                name="fruit_name",
+                value=fruit_name
+            )
+
+        div.form-group
+            label.fruiteAttr(for="fruit_color") Fruit Color
+            input#size(
+                type="text",
+                name="fruit_color",
+                value=fruit_color
+            )
+
+        div.form-group
+            label.fruitAttr(for="fruit_marketPrice") Fruit Market Price
+            input#cost(
+                type="number",
+                name="fruit_marketPrice",
+                value=fruit_marketPrice
+            )
+
+        input(type="submit", value="Update Fruit")
+
+    script.
+        document.forms['FruitForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            // TODO: Show user that form is being submitted
+            fetch(event.target.action, {
+                method: 'PUT',
+                body: new URLSearchParams(new FormData(event.target))
+            })
+            .then((resp) => {
+                return resp.json(); // or resp.text()
+            })
+            .then((body) => {
+                alert("Update succeeded");
+                // TODO: Handle response body
+            })
+            .catch((error) => {
+                // TODO: Handle error
+                alert("Update failed " + error);
+            });
+        });
