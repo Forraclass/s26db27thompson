@@ -1,0 +1,62 @@
+extends layout
+
+block content
+    h1= title
+
+    if (toShow == null)
+        h2 No instance to delete
+    else
+        - let fruit_id = toShow._id
+        - let fruit_name = toShow.name
+        - let fruit_color = toShow.color
+        - let fruit_marketPrice = toShow.marketPrice
+        - let actionid = "/resource/delete/" + fruit_id
+
+        script.
+            let actionid = "#{actionid}";
+
+        div
+            div.row
+                div.fruitAttr.mr-3 Fruit ID is:
+                div #{fruit_id}
+
+            div.row
+                div.fruitAttr.mr-3 Fruit name is:
+                div #{fruit_name}
+
+            div.row
+                div.fruitAttr.mr-3 Fruit Color is:
+                div #{fruit_color}
+
+            div.row
+                div.fruitAttr.mr-3 Fruit Market Price is:
+                div #{fruit_marketPrice}
+
+            button.btn.btn-danger.m-2(onclick="deleteOnid()") Delete
+            button.btn.btn-secondary.m-2(onclick="cancel()") Cancel
+
+        script.
+            function cancel() {
+                // Go back to the home page for the fruit collection
+                window.location.href = '/fruit';
+            }
+
+        script.
+            function deleteOnid() {
+                console.log("starting delete");
+
+                // Delete request
+                fetch(actionid, {
+                    method: 'DELETE'
+                })
+                .then((resp) => {
+                    return resp.json(); // or resp.text()
+                })
+                .then((body) => {
+                    alert("Delete succeeded");
+                    window.location.href = '/fruit';
+                })
+                .catch((error) => {
+                    alert("Delete failed " + error);
+                });
+            }
