@@ -3,9 +3,21 @@ extends layout
 block content
   h1= title
 
-  .row
-    each item in results
-      .col-sm-2
-        p Name: #{item.name}
-        p Color: #{item.color}
-        p Market Price: #{item.marketPrice}
+  .container-fluid
+    .row.m-1
+      each item in results
+        - let destination = `/resource/update?id=${item._id}`
+
+        .col-sm-2.m-1
+          p <b>Item:</b> #{item.name} 
+          p <b>Color:</b> #{item.color} 
+          p <b>Market Price:</b> $#{item.marketPrice}
+
+          button.btn.btn-primary.ml-1(
+            onclick=`dispatch('${destination}')`
+          ) Update
+
+  script.
+    function dispatch(path) {
+      window.location.href = path;
+    }
