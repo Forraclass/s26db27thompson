@@ -3,19 +3,23 @@ extends layout
 block content
   h1= title
 
+  button.btn.btn-primary.ml-1(onclick=`dispatch("/resource/create")`) Create New
+
   .container-fluid
     .row.m-1
       each item in results
-        - let destination = `/resource/update?id=${item._id}`
+        - let updatePath = `/resource/update?id=${item._id}`
+        - let deletePath = `/resource/delete?id=${item._id}`
+        - let detailPath = `/resource/detail?id=${item._id}`
 
         .col-sm-2.m-1
           p <b>Item:</b> #{item.name} 
           p <b>Color:</b> #{item.color} 
           p <b>Market Price:</b> $#{item.marketPrice}
 
-          button.btn.btn-primary.ml-1(
-            onclick=`dispatch('${destination}')`
-          ) Update
+          button.btn.btn-primary.ml-1(onclick=`dispatch('${detailPath}')`) Fruit Details
+          button.btn.btn-primary.ml-1(onclick=`dispatch('${updatePath}')`) Update
+          button(class="btn btn-danger m-2" onclick=`dispatch('${deletePath}')`) Delete
 
   script.
     function dispatch(path) {

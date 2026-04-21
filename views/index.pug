@@ -1,20 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}'s assignment 11
-  <button type="button" class="btn btn-secondary" onclick="reduce()">Sample Button</button>
-  <div id="use">take some away</div>
-  a(href= "/quixotic") Link to Quixotic
+  if (!user)
+    a(href='/login') Login
+    br
+    a(href='/register') Register
 
-  script.
-    let current = 11;
-    let quantity = 2;
-    function reduce() {
-      current = current - quantity
-      if (current < 0){
-        current = 0;
-      }
-      document.getElementById("use").innerHTML = 
-      `Reduced by ${quantity} to ${current}`;
-    }
+  if (user)
+    p You are currently logged in as #{user.username}
+    a(href='/fruits') Take me to fruits
+    br
+    a(href='/logout') Logout

@@ -20,7 +20,8 @@ block content
             input#fruit_name(
                 type="text",
                 name="fruit_name",
-                value=fruit_name
+                value=fruit_name,
+                required
             )
 
         div.form-group
@@ -28,7 +29,8 @@ block content
             input#size(
                 type="text",
                 name="fruit_color",
-                value=fruit_color
+                value=fruit_color,
+                required
             )
 
         div.form-group
@@ -36,7 +38,9 @@ block content
             input#cost(
                 type="number",
                 name="fruit_marketPrice",
-                value=fruit_marketPrice
+                value=fruit_marketPrice,
+                min="1",
+                max="10000000000"
             )
 
         input(type="submit", value="Update Fruit")
@@ -51,7 +55,7 @@ block content
                 body: new URLSearchParams(new FormData(event.target))
             })
             .then((resp) => {
-                return resp.json(); // or resp.text()
+                return resp.text(); // or resp.text()
             })
             .then((body) => {
                 alert("Update succeeded");
